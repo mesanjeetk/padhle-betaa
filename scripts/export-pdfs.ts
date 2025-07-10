@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { chromium } from 'playwright'
-import { subjects } from '../content/chapters.generated'
+import { subjects } from '@/data/chapters.generated'
 
 const BASE_URL = 'http://localhost:3000'
 async function exportPDFs() {
