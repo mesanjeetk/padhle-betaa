@@ -2,20 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Prevent content from breaking awkwardly across pages */
+h1, h2, h3, h4,
+p, ul, ol, table,
+blockquote, pre, code,
+thead, tr, td, th {
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Keep headings and key blocks together */
+h2, h3 {
+  page-break-after: avoid;
 }
 
+/* Add vertical rhythm between blocks */
+section, article, div, .chapter-section {
+  margin-bottom: 1.5rem;
+}
+
+/* Let long content flow naturally in print */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+  margin: 0;
+  padding: 1cm;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Hide unwanted layout parts like navbar/footer/etc. */
+@media print {
+  header, footer, nav, .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .no-break {
+    page-break-before: avoid;
+    page-break-after: avoid;
+    break-inside: avoid;
+  }
+
+  /* Optional: improve table visibility */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+    padding: 0.5rem;
+  }
 }
